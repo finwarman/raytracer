@@ -1,8 +1,8 @@
 // this file contains the definition of the class GeometricObject
 
-#include "utility/constants.h"
-#include "utility/rgbcolour.h" // todo - material
-#include "geometricobjects/geometricobject.h"
+#include "constants.h"
+#include "rgbcolour.h" // todo - material
+#include "geometricobject.h"
 
 // default constructor
 GeometricObject::GeometricObject(void) : colour(black) {}

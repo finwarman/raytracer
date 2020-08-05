@@ -1,7 +1,7 @@
 // this file contains the definition of the class Point3D
 
 #include <math.h>
-#include "utility/point3d.h"
+#include "point3d.h"
 
 // default constructor
 Point3D::Point3D()

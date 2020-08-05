@@ -1,4 +1,4 @@
-#include "geometricobjects/sphere.h"
+#include "sphere.h"
 #include <math.h>
 
 const double Sphere::kEpsilon = 0.001;

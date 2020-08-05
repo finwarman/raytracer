@@ -1,10 +1,10 @@
 #ifndef __WORLD__
 #define __WORLD__
 
-#include "world/viewplane.h"
-#include "utility/rgbcolour.h"
-#include "geometricobjects/sphere.h"
-#include "tracers/tracer.h"
+#include "viewplane.h"
+#include "rgbcolour.h"
+#include "sphere.h"
+#include "tracer.h"
 
 #include <vector>
 #include <algorithm>

@@ -6,9 +6,9 @@
 
 class RGBColour; // todo - material
 
-#include "utility/point3d.h"
-#include "utility/ray.h"
-#include "utility/shaderec.h"
+#include "point3d.h"
+#include "ray.h"
+#include "shaderec.h"
 
 class GeometricObject
 {

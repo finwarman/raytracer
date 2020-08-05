@@ -1,5 +1,5 @@
-#include "utility/shaderec.h"
-#include "utility/constants.h"
+#include "shaderec.h"
+#include "constants.h"
 
 // constructor (initialise defaults)
 ShadeRec::ShadeRec(World &wr)

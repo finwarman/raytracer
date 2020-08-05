@@ -1,26 +1,41 @@
 // definition of class for world
 
-#include "world/world.h"
+#include "world.h"
 
 // constants - used for kEpsilon and kHugeValue
-#include "utility/constants.h"
+#include "constants.h"
 
 // geometric objects
-#include "geometricobjects/sphere.h"
-// #include "geometricobjects/plane.h"
+#include "sphere.h"
+// #include "plane.h"
 
 // utils
-#include "utility/vector3d.h"
-#include "utility/point3d.h"
-#include "utility/normal.h"
-#include "utility/ray.h"
-#include "utility/shaderec.h"
+#include "vector3d.h"
+#include "point3d.h"
+#include "normal.h"
+#include "ray.h"
+#include "shaderec.h"
 
 // tracers
-#include "tracers/singlesphere.h"
+#include "singlesphere.h"
 
 // build functions
-#include "build/build.cpp" // builds the red sphere! - todo rename
+// #include "build.cpp" // builds the red sphere! - todo rename
+// TODO - move this into the above:
+void World::build()
+{
+    vp.set_hres(200);
+    vp.set_vres(200);
+
+    vp.set_pixel_size(1.0);
+    vp.set_gamma(1.0);
+
+    background_colour = black;
+    tracer_ptr = new SingleSphere(this);
+
+    sphere.set_centre(0.0);
+    sphere.set_radius(85.0);
+}
 
 // world member function definitions:
 

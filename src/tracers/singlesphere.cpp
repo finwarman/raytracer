@@ -1,7 +1,7 @@
 
-#include "tracers/singlesphere.h"
-#include "world/world.h"
-#include "utility/shaderec.h"
+#include "singlesphere.h"
+#include "world.h"
+#include "shaderec.h"
 
 // default constructor
 SingleSphere::SingleSphere() : Tracer() {} // call parent constructor

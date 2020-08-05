@@ -2,7 +2,7 @@
 
 #include <math.h>
 
-#include "utility/rgbcolour.h"
+#include "rgbcolour.h"
 
 // default constructor (black)
 RGBColour::RGBColour(void) : r(0.0), g(0.0), b(0.0) {}

@@ -3,9 +3,9 @@
 
 // base class for describing tracers for objects
 
-#include "utility/constants.h"
-#include "utility/ray.h"
-#include "utility/rgbcolour.h"
+#include "constants.h"
+#include "ray.h"
+#include "rgbcolour.h"
 
 class World; // only pointers - forward class reference ok
 

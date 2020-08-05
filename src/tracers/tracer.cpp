@@ -1,4 +1,4 @@
-#include "tracers/tracer.h"
+#include "tracer.h"
 
 // default constructor
 Tracer::Tracer() : world_ptr(NULL) {}

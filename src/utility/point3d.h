@@ -4,7 +4,7 @@
 // This file contains the defintion of the class Point3D
 
 //#include "matrix.h" todo
-#include "utility/vector3d.h"
+#include "vector3d.h"
 
 class Point3D
 {

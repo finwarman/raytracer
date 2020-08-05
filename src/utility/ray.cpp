@@ -1,4 +1,4 @@
-#include "utility/ray.h"
+#include "ray.h"
 
 // default constructor (centreed at origin, unit in z direction)
 Ray::Ray() : o(0.0), d(0.0, 0.0, 1.0) {}

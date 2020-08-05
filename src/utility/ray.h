@@ -1,8 +1,8 @@
 #ifndef __RAY__
 #define __RAY__
 
-#include "utility/point3d.h"
-#include "utility/vector3d.h"
+#include "point3d.h"
+#include "vector3d.h"
 
 class Ray
 {

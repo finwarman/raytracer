@@ -2,7 +2,7 @@
 
 #include <math.h>
 
-#include "utility/normal.h"
+#include "normal.h"
 
 // default constructor (zero vector)
 Normal::Normal(void) : x(0.0), y(0.0), z(0.0) {}

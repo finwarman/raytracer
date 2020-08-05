@@ -3,9 +3,9 @@
 
 // This file contains the declaration of the class Normal - a vector perpendicular to a surface
 
-// todo - #include "utility/matrix.h"
-#include "utility/vector3d.h"
-#include "utility/point3d.h"
+// todo - #include "matrix.h"
+#include "vector3d.h"
+#include "point3d.h"
 
 class Normal
 {

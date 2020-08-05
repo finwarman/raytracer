@@ -2,9 +2,9 @@
 
 #include <math.h>
 
-#include "utility/vector3d.h"
-#include "utility/normal.h"
-#include "utility/point3d.h"
+#include "vector3d.h"
+#include "normal.h"
+#include "point3d.h"
 
 // default constructor
 Vector3D::Vector3D(void) : x(0.0), y(0.0), z(0.0) {}

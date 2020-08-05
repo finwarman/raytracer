@@ -1,7 +1,7 @@
 #ifndef __SINGLESPHERE__
 #define __SINGLESPHERE__
 
-#include "tracers/tracer.h"
+#include "tracer.h"
 
 class SingleSphere : public Tracer
 {

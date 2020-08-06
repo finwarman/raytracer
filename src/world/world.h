@@ -32,7 +32,8 @@ public:
     void build();
     void render_scene() const;
 
-    // todo - add object
+    // managing objects
+    void add_object(GeometricObject *object_ptr);
 
     // colour clamping
     RGBColour max_to_one(const RGBColour &c) const;
@@ -46,10 +47,13 @@ public:
     ShadeRec hit_objects(const Ray &ray);
 
 private:
-    void
-    delete_objects(void);
+    void delete_objects(); // delete all objects in objects array
 };
 
-// todo - object adding etc.
+// object handling
+inline void World::add_object(GeometricObject *object_ptr)
+{
+    objects.push_back(object_ptr);
+}
 
 #endif

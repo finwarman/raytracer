@@ -11,7 +11,7 @@
 
 // geometric objects
 #include "sphere.h"
-// #include "plane.h"
+//#include "plane.h"
 
 // utils
 #include "vector3d.h"
@@ -22,6 +22,7 @@
 
 // tracers
 #include "singlesphere.h"
+#include "multipleobjects.h"
 
 // build functions
 // #include "build.cpp" // builds the red sphere! - todo rename
@@ -34,12 +35,22 @@ void World::build()
     vp.set_pixel_size(1.0);
     vp.set_gamma(1.0);
 
-    background_colour = black;           // set world background colour
-    tracer_ptr = new SingleSphere(this); // create tracer of 'SingleSphere' type
+    background_colour = black;              // set world background colour
+    tracer_ptr = new MultipleObjects(this); // create tracer of 'MultipleObjects' type
 
-    // intialise single sphere in world
-    sphere.set_centre(0.0);
-    sphere.set_radius(13.0);
+    // add objects
+
+    // spheres
+    Sphere *sphere_ptr = new Sphere();
+
+    sphere_ptr->set_centre(0.0);
+    sphere_ptr->set_radius(13.0);
+    sphere_ptr->set_colour(red); // red
+    add_object(sphere_ptr);
+
+    sphere_ptr = new Sphere(Point3D(-10, -5, 50), 8);
+    sphere_ptr->set_colour(RGBColour(1, 0.5, 0)); // yellow
+    add_object(sphere_ptr);
 }
 
 // world member function definitions:
@@ -168,12 +179,10 @@ void World::display_pixel(const int row, const int column, const RGBColour &raw_
     //                     (int)(mapped_Colour.b * 255));
 }
 
-// ----------------------------------------------------------------------------- hit_objects
+// hit_objects
 
-ShadeRec
-World::hit_objects(const Ray &ray)
+ShadeRec World::hit_objects(const Ray &ray)
 {
-
     ShadeRec sr(*this);
     double t;
     Normal normal;
@@ -188,21 +197,21 @@ World::hit_objects(const Ray &ray)
             tmin = t;
             sr.colour = objects[j]->get_colour(); // todo - pointer?
             //sr.hit_point = ray.o + t * ray.d;
-            normal = sr.normal;
-            local_hit_point = sr.local_hit_point;
+            //normal = sr.normal;
+            //local_hit_point = sr.local_hit_point;
         }
 
     if (sr.hit_an_object)
     {
         sr.t = tmin;
         sr.normal = normal;
-        sr.local_hit_point = local_hit_point;
+        //sr.local_hit_point = local_hit_point;
     }
 
     return sr;
 }
 
-//------------------------------------------------------------------ delete_objects
+// delete_objects
 
 // Deletes the objects in the objects array, and erases the array.
 // The objects array still exists, because it's an automatic variable, but it's empty

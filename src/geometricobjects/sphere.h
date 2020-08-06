@@ -28,6 +28,8 @@ public:
 
     void set_radius(const double r);
 
+    void set_colour(const RGBColour &_colour);
+
     // determine if ray hit sphere (and where)
     virtual bool hit(const Ray &ray, double &t, ShadeRec &s) const;
 
@@ -52,6 +54,11 @@ inline void Sphere::set_centre(const double x, const double y, const double z)
 inline void Sphere::set_radius(const double r)
 {
     radius = r;
+}
+
+inline void Sphere::set_colour(const RGBColour &_colour)
+{
+    colour = _colour;
 }
 
 #endif

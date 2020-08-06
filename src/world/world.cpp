@@ -2,6 +2,9 @@
 
 #include "world.h"
 
+// todo remove
+#include <iostream>
+
 // constants - used for kEpsilon and kHugeValue
 #include "constants.h"
 
@@ -30,9 +33,10 @@ void World::build()
     vp.set_pixel_size(1.0);
     vp.set_gamma(1.0);
 
-    background_colour = black;
-    tracer_ptr = new SingleSphere(this);
+    background_colour = black;           // set world background colour
+    tracer_ptr = new SingleSphere(this); // create tracer of 'SingleSphere' type
 
+    // intialise single sphere in world
     sphere.set_centre(0.0);
     sphere.set_radius(85.0);
 }
@@ -77,6 +81,8 @@ void World::render_scene() const
             pixel_colour = tracer_ptr->trace_ray(ray);
             display_pixel(r, c, pixel_colour);
         }
+        // todo remove
+        std::cout << "\n";
     }
 }
 
@@ -138,6 +144,11 @@ void World::display_pixel(const int row, const int column, const RGBColour &raw_
     //have to start from max y coordinate to convert to screen coordinates
     int x = column;
     int y = vp.vres - row - 1;
+
+    // print pixel data
+    char pixel_char = mapped_colour.average() > 0.001 ? '+' : ' ';
+    std::cout
+        << " " << pixel_char;
 
     // todo
     // paintArea->setPixel(x, y, (int)(mapped_Colour.r * 255),

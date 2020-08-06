@@ -11,7 +11,7 @@
 
 // geometric objects
 #include "sphere.h"
-//#include "plane.h"
+#include "plane.h"
 
 // utils
 #include "vector3d.h"
@@ -25,33 +25,8 @@
 #include "multipleobjects.h"
 
 // build functions
-// #include "build.cpp" // builds the red sphere! - todo rename
-// TODO - move this into the above:
-void World::build()
-{
-    vp.set_hres(60);
-    vp.set_vres(30);
-
-    vp.set_pixel_size(1.0);
-    vp.set_gamma(1.0);
-
-    background_colour = black;              // set world background colour
-    tracer_ptr = new MultipleObjects(this); // create tracer of 'MultipleObjects' type
-
-    // add objects
-
-    // spheres
-    Sphere *sphere_ptr = new Sphere();
-
-    sphere_ptr->set_centre(0.0);
-    sphere_ptr->set_radius(13.0);
-    sphere_ptr->set_colour(red); // red
-    add_object(sphere_ptr);
-
-    sphere_ptr = new Sphere(Point3D(-10, -5, 50), 8);
-    sphere_ptr->set_colour(RGBColour(1, 0.5, 0)); // yellow
-    add_object(sphere_ptr);
-}
+// #include "onesphere.cpp" // builds the red sphere, using singlesphere tracer
+#include "planesandspheres.cpp" // builds a multi object scene, using multipleobjects tracer
 
 // world member function definitions:
 

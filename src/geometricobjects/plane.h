@@ -9,9 +9,16 @@ class Plane : public GeometricObject
 {
 public:
     Plane(void);
-    Plane(const Point3D p, const Normal &n);
+    Plane(const Point3D &p, const Normal &n);
+    Plane(const Plane &plane); // copy constructor
 
-    // TODO ...
+    virtual Plane *clone() const;
+
+    Plane &operator=(const Plane &rhs);
+
+    virtual ~Plane();
+
+    void set_colour(const RGBColour &_colour);
 
     virtual bool hit(const Ray &ray, double &t, ShadeRec &s) const;
 
@@ -21,22 +28,9 @@ private:
     static const double kEpsilon; // TODO - see chapter 16
 };
 
-bool Plane::hit(const Ray &ray, double &tmin, ShadeRec &sr) const // did ray hit object?, modify tmin for nearest hit point (if any), and return shading info
+inline void Plane::set_colour(const RGBColour &_colour)
 {
-    double t = (point - ray.o) * normal / (ray.d * normal); // if d*n=0, t = INF
-
-    if (t > kEpsilon) // TODO - explain (chap 16 - this finds closest point?)
-    {
-        tmin = t;
-        sr.normal = normal;
-        sr.local_hit_point = ray.o + t * ray.d;
-
-        return true;
-    }
-    else
-    {
-        return false;
-    }
+    colour = _colour;
 }
 
 #endif

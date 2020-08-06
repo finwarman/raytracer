@@ -1,5 +1,5 @@
-#ifndef __PLANE__
-#define __PLANE__
+#ifndef __SPHERE__
+#define __SPHERE__
 
 // sphere class - inherits from GeometricObject
 

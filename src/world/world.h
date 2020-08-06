@@ -8,6 +8,8 @@
 
 #include <vector>
 #include <algorithm>
+#include <math.h>
+#include <string>
 // using namespace std;
 
 //class RenderThread;
@@ -20,6 +22,9 @@ public:
     Sphere sphere; // chapter 3 only
     Tracer *tracer_ptr;
     std::vector<GeometricObject *> objects;
+
+    // store brightness chars
+    const static std::string brightness_chars[];
 
     World();  // default constructor
     ~World(); // destructor

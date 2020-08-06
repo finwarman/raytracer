@@ -2,8 +2,9 @@
 
 #include "world.h"
 
-// todo remove
+// for console output
 #include <iostream>
+// #include <fmt/core.h>
 
 // constants - used for kEpsilon and kHugeValue
 #include "constants.h"
@@ -27,8 +28,8 @@
 // TODO - move this into the above:
 void World::build()
 {
-    vp.set_hres(200);
-    vp.set_vres(200);
+    vp.set_hres(60);
+    vp.set_vres(30);
 
     vp.set_pixel_size(1.0);
     vp.set_gamma(1.0);
@@ -38,7 +39,7 @@ void World::build()
 
     // intialise single sphere in world
     sphere.set_centre(0.0);
-    sphere.set_radius(85.0);
+    sphere.set_radius(13.0);
 }
 
 // world member function definitions:
@@ -123,6 +124,8 @@ RGBColour World::clamp_to_colour(const RGBColour &raw_colour) const
 // the system-dependent code is in the function convert_to_display_colour
 // the function SetCPixel is a Mac OS function
 
+const std::string World::brightness_chars[] = {" ", ".", "-", "+", "#", "€", "@", "░", "▒", "▓", "█", "█"};
+
 void World::display_pixel(const int row, const int column, const RGBColour &raw_colour) const
 {
     RGBColour mapped_colour;
@@ -146,11 +149,20 @@ void World::display_pixel(const int row, const int column, const RGBColour &raw_
     int y = vp.vres - row - 1;
 
     // print pixel data
-    char pixel_char = mapped_colour.average() > 0.001 ? '+' : ' ';
-    std::cout
-        << " " << pixel_char;
+    int char_index = floor(mapped_colour.average() * 10);
+    std::string c_brightness = brightness_chars[char_index];
 
-    // todo
+    // generate ansi pallette colour
+    int c_r = (int)(mapped_colour.r * 5);
+    int c_g = (int)(mapped_colour.g * 5);
+    int c_b = (int)(mapped_colour.b * 5);
+    int colour_num = 16 + 36 * c_r + 6 * c_g + c_b;
+
+    std::string rgb_string = "\x1B[38;5;" + std::to_string(colour_num) + "m" + c_brightness + "\x1b[0m";
+
+    std::cout << rgb_string << rgb_string; // display (doubled up / added space for square padding)
+
+    // todo -
     // paintArea->setPixel(x, y, (int)(mapped_Colour.r * 255),
     //                     (int)(mapped_Colour.g * 255),
     //                     (int)(mapped_Colour.b * 255));

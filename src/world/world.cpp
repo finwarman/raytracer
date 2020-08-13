@@ -69,7 +69,7 @@ void World::render_scene() const
 
     float zw = 100.0; // hardcoded
 
-    int n = vp.num_samples; // number of samples
+    int n = (int)sqrt((float)vp.num_samples); // number of samples (2d - sqrt)
 
     ray.d = Vector3D(0, 0, -1); // direction of ray along z axis
 
@@ -79,16 +79,19 @@ void World::render_scene() const
     {
         for (int c = 0; c <= hres; c++)
         {
-            // antialiasing: random sampling (n samples per pixel)
+            // antialiasing: random jittered sampling (n*n samples per pixel)
             pixel_colour = black;
 
             // subpixels (random)
             for (int p = 0; p < n; p++)
             {
-                float p_x = s * (c - 0.5 * hres + rand_float());
-                float p_y = s * (r - 0.5 * vres + rand_float());
-                ray.o = Point3D(p_x, p_y, zw);
-                pixel_colour += tracer_ptr->trace_ray(ray);
+                for (int q = 0; q < n; q++) // across px
+                {
+                    float p_x = s * (c - 0.5 * hres + (q + rand_float()) / n);
+                    float p_y = s * (r - 0.5 * vres + (p + rand_float()) / n);
+                    ray.o = Point3D(p_x, p_y, zw);
+                    pixel_colour += tracer_ptr->trace_ray(ray);
+                }
             }
 
             pixel_colour /= vp.num_samples; // determine average colour

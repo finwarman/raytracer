@@ -3,10 +3,10 @@
 void World::build()
 {
 
-    vp.set_hres(60);
-    vp.set_vres(30);
+    vp.set_hres(120);
+    vp.set_vres(60);
 
-    vp.set_pixel_size(1.0);
+    vp.set_pixel_size(0.3);
     vp.set_gamma(1.0);
 
     background_colour = black;              // set world background colour
@@ -24,6 +24,10 @@ void World::build()
 
     sphere_ptr = new Sphere(Point3D(-10, -5, -10), 8);
     sphere_ptr->set_colour(RGBColour(1, 0.5, 0)); // yellow
+    add_object(sphere_ptr);
+
+    sphere_ptr = new Sphere(Point3D(0, 0, 10), 7);
+    sphere_ptr->set_colour(RGBColour(blue));
     add_object(sphere_ptr);
 
     // planes

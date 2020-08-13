@@ -45,6 +45,17 @@ World::~World()
     delete_objects();
 }
 
+float rand_float_range(float a, float b)
+{
+    return fmaf((float)rand() / RAND_MAX, b - a, a);
+}
+
+// helper (TODO: move)
+float rand_float()
+{
+    return rand_float_range(0.0, 1.0);
+}
+
 // render scene - orthographic view along zw axis
 
 void World::render_scene() const
@@ -58,7 +69,7 @@ void World::render_scene() const
 
     float zw = 100.0; // hardcoded
 
-    int n = (int)sqrt((float)vp.num_samples); // sqrt number of samples (squared again in 2d subpixel samples)
+    int n = vp.num_samples; // number of samples
 
     ray.d = Vector3D(0, 0, -1); // direction of ray along z axis
 
@@ -68,26 +79,19 @@ void World::render_scene() const
     {
         for (int c = 0; c <= hres; c++)
         {
-            // antialiasing: regular sampling (multiple samples per pixel) - determine average colour
+            // antialiasing: random sampling (n samples per pixel)
             pixel_colour = black;
 
-            // subpixels
-            for (int p = 0; p < n; p++) // up px
+            // subpixels (random)
+            for (int p = 0; p < n; p++)
             {
-                for (int q = 0; q < n; q++) // across px
-                {
-                    float p_x = s * (c - 0.5 * hres + (q + 0.5) / n);
-                    float p_y = s * (r - 0.5 * vres + (p + 0.5) / n);
-                    ray.o = Point3D(p_x, p_y, zw);
-                    pixel_colour += tracer_ptr->trace_ray(ray);
-                }
+                float p_x = s * (c - 0.5 * hres + rand_float());
+                float p_y = s * (r - 0.5 * vres + rand_float());
+                ray.o = Point3D(p_x, p_y, zw);
+                pixel_colour += tracer_ptr->trace_ray(ray);
             }
 
             pixel_colour /= vp.num_samples; // determine average colour
-
-            // Non antialiased:
-            // ray.o = Point3D(s * (c - hres / 2.0 + 0.5), s * (r - vres / 2.0 + 0.5), zw);
-            // pixel_colour = tracer_ptr->trace_ray(ray);
 
             display_pixel(r, c, pixel_colour);
         }
@@ -132,8 +136,8 @@ RGBColour World::clamp_to_colour(const RGBColour &raw_colour) const
 // the system-dependent code is in the function convert_to_display_colour
 // the function SetCPixel is a Mac OS function
 
-//const std::string World::brightness_chars[] = {".", ".", "-", "+", "#", "€", "@", "░", "▒", "▓", "█", "█"};
-const std::string World::brightness_chars[] = {"░", "░", "░", "▒", "▒", "▒", "▓", "▓", "▓", "█", "█", "█"};
+const std::string World::brightness_chars[] = {"·", "·", "+", "+", "#", "€", "@", "░", "▒", "▓", "█", "█"};
+// const std::string World::brightness_chars[] = {"░", "░", "░", "▒", "▒", "▒", "▓", "▓", "▓", "█", "█", "█"};
 
 void World::display_pixel(const int row, const int column, const RGBColour &raw_colour) const
 {

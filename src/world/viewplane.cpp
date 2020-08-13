@@ -7,7 +7,7 @@ ViewPlane::ViewPlane(void)
     : hres(400),
       vres(400),
       s(1.0),
-      num_samples(1),
+      num_samples(16), // subpixel samples for antialiasing
       gamma(1.0),
       inv_gamma(1.0),
       show_out_of_gamut(false)

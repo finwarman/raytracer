@@ -38,6 +38,7 @@ Sphere::~Sphere() {}
 // bool: did ray hit this sphere?, modify tmin for nearest hit point (if any), and modify shading info
 bool Sphere::hit(const Ray &ray, double &tmin, ShadeRec &sr) const
 {
+    // TODO - explain this formula (and use useful variable names)
     double t;
     Vector3D temp = ray.o - centre;
     double a = ray.d * ray.d;
